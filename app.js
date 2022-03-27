@@ -13,15 +13,17 @@ app.use(bodyParser.json());
 
 const dbURI = process.env.dbURI;
 
-mongoose
+async function initDB() {
+await mongoose
 	.connect(dbURI, {
 		useNewUrlParser: true,
 		useUnifiedTopology: true,
 	})
-	.then(() => console.log("Database Connected"))
+	// .then(() => console.log("Database Connected"))
 	.catch((err) => console.log(err));
+}
 
-mongoose.Promise = global.Promise;
+initDB();
 
 app.use('/', Router);
 
